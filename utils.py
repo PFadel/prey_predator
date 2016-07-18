@@ -9,7 +9,6 @@ def soma_tuplas(*tuplas):
     resp = (0, 0)
     for t in tuplas:
         resp = add_two_tuples(resp, t)
-        # import pdb;pdb.set_trace()
     return resp
 
 
