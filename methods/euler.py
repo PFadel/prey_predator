@@ -1,5 +1,5 @@
 # encoding utf-8
-from utils import multi_tupla, add_two_tuples
+from utils import multi_tuple, add_two_tuples
 
 
 def euler(function, x0, x1, y, n=1):
@@ -10,27 +10,27 @@ def euler(function, x0, x1, y, n=1):
 
 
 def euler_int(function, x0, x1, y, n):
-    y_antigo = y
+    old_y = y
     h = (x1 - x0) / float(n)
-    x_antigo = x0
+    old_x = x0
     for i in range(1, n + 1):
-        x_novo = x_antigo + h
-        y_novo = y_antigo + h * function(x_antigo, y_antigo)
-        x_antigo = x_novo
-        y_antigo = y_novo
+        new_x = old_x + h
+        new_y = old_y + h * function(old_x, old_y)
+        old_x = new_x
+        old_y = new_y
 
-    return y_novo
+    return new_y
 
 
 def euler_tuple(function, x0, x1, y, n):
-    y_antigo = y
+    old_y = y
     h = (x1 - x0) / float(n)
-    x_antigo = x0
+    old_x = x0
     for i in range(1, n + 1):
-        x_novo = x_antigo + h
-        y_novo = add_two_tuples(y_antigo,
-                                multi_tupla(h, function(x_antigo, y_antigo)))
-        x_antigo = x_novo
-        y_antigo = y_novo
+        new_x = old_x + h
+        new_y = add_two_tuples(old_y, multi_tuple(h, function(old_x, old_y)))
 
-    return y_novo
+        old_x = new_x
+        old_y = new_y
+
+    return new_y

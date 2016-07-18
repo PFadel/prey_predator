@@ -1,5 +1,5 @@
 # encoding utf-8
-from utils import multi_tupla, add_two_tuples
+from utils import multi_tuple, add_two_tuples
 from euler import euler
 
 
@@ -12,36 +12,36 @@ def rk2(function, x0, x1, y, n=1):
 
 
 def rk2_int(function, x0, x1, y, n):
-    y_antigo = y
+    old_y = y
     h = (x1 - x0) / float(n)
-    x_antigo = x0
+    old_x = x0
     for i in range(1, n + 1):
-        x_novo = x_antigo + h
+        new_x = old_x + h
 
-        temp = function(x_antigo, y_antigo) + function(
-            x_antigo, euler(function, x_antigo, x_novo, y_antigo, n))
+        temp = function(old_x, old_y) + function(
+            old_x, euler(function, old_x, new_x, old_y, n))
 
-        y_novo = y_antigo + 0.5 * h * temp
-        x_antigo = x_novo
-        y_antigo = y_novo
+        new_y = old_y + 0.5 * h * temp
+        old_x = new_x
+        old_y = new_y
 
-    return y_novo
+    return new_y
 
 
 def rk2_tuple(function, x0, x1, y, n):
-    y_antigo = y
+    old_y = y
     h = (x1 - x0) / float(n)
-    x_antigo = x0
+    old_x = x0
     for i in range(1, n + 1):
-        x_novo = x_antigo + h
+        new_x = old_x + h
 
-        temp = add_two_tuples(function(x_antigo, y_antigo),
-                              function(x_antigo, euler(function, x_antigo,
-                                                       x_novo, y_antigo)))
+        temp = add_two_tuples(function(old_x, old_y),
+                              function(old_x, euler(function, old_x,
+                                                    new_x, old_y)))
 
-        y_novo = add_two_tuples(y_antigo, multi_tupla(0.5 * h, (temp)))
+        new_y = add_two_tuples(old_y, multi_tuple(0.5 * h, (temp)))
 
-        x_antigo = x_novo
-        y_antigo = y_novo
+        old_x = new_x
+        old_y = new_y
 
-    return y_novo
+    return new_y

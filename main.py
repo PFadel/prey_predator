@@ -34,7 +34,6 @@ while True:
             break
 
         print rk4(function, 0, time, (240, 40), intervals)
-
         print 'Se deseja sair use [0]!'
 
     elif method == 2:
@@ -49,7 +48,6 @@ while True:
             break
 
         print am3(function, 0, time, (240, 40), intervals)
-
         print 'Se deseja sair use [0]!'
 
     elif method == 0:
