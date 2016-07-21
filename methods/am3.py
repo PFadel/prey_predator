@@ -33,15 +33,15 @@ def am3_tuple(function, x0, x1, y0, n):
 
     for i in range(1, n + 1):
         # Calcula temporarias para usar na conta
-        temp_k_minus_one = multi_tuple(-1 / 12, function(x_k_minus_one,
-                                                         y_k_minus_one))
+        temp_k_minus_one = multi_tuple(- 1 / float(12), function(x_k_minus_one,
+                                                                 y_k_minus_one))
 
-        temp_k = multi_tuple(8 / 12, function(x_k, y_k))
+        temp_k = multi_tuple(8 / float(12), function(x_k, y_k))
 
         predicted_y_k_plus_one = rk2(function, x_k, x_k_plus_one, y_k, 1)
 
-        temp_k_plus_one = multi_tuple(5 / 12, function(x_k_plus_one,
-                                                       predicted_y_k_plus_one))
+        temp_k_plus_one = multi_tuple(5 / float(12), function(x_k_plus_one,
+                                                              predicted_y_k_plus_one))
 
         # Calcula novo valor de Y
         new_y = add_two_tuples(y_k, multi_tuple(h, (add_many_tuples(
