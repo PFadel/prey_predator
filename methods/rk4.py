@@ -10,8 +10,10 @@ def rk4(function, x0, x1, y0, n=1):
 
 
 def rk4_tuple(function, x0, x1, y0, n):
-    old_y = y0
+    # Calcula o tamanho do passo em X dependendo do numero de intervalos
     h = (x1 - x0) / float(n)
+
+    old_y = y0
     old_x = x0
     for i in range(1, n + 1):
         k1 = multi_tuple(h, function(old_x, old_y))
@@ -34,8 +36,10 @@ def rk4_tuple(function, x0, x1, y0, n):
 
 
 def rk4_int(function, x0, x1, y0, n):
-    old_y = y0
+    # Calcula o tamanho do passo em X dependendo do numero de intervalos
     h = (x1 - x0) / float(n)
+
+    old_y = y0
     old_x = x0
     for i in range(1, n + 1):
         k1 = h * function(old_x, old_y)

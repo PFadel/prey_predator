@@ -1,6 +1,22 @@
 # encoding utf-8
 
 
+def ask_for_function():
+    while True:
+        print 'Se deseja sair use [0]!'
+        choice = input('Deseja usar a funcao com constantes de fertilidade ou '
+                       'com variacao periodica no indice de presas ? '
+                       '[1] Constantes [2] Variacao periodica \n')
+
+        if choice == 0:
+            return None
+        elif choice in [1, 2]:
+            break
+        else:
+            print 'Essa nao e uma opcao valida!'
+    return choice
+
+
 def ask_for_time():
     while True:
         print 'Se deseja sair use [0]!'
@@ -26,3 +42,23 @@ def ask_for_intervals():
         else:
             print 'Essa nao e uma opcao valida!'
     return intervals
+
+
+def ask_for_entry():
+    while True:
+        print 'Se deseja sair use [0]!'
+        preys = input('Qual deve ser a populacao inicial de presas ? \n')
+        if preys == 0:
+            return None
+        elif isinstance(preys, int):
+            print 'Se deseja sair use [0]!'
+            predators = input('E de predadores ? \n')
+            if predators == 0:
+                return None
+            elif isinstance(predators, int):
+                break
+            else:
+                print 'Essa nao e uma opcao valida!'
+        else:
+            print 'Essa nao e uma opcao valida!'
+    return (preys, predators)

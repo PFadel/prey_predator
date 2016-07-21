@@ -11,18 +11,20 @@ def am3(function, x0, x1, y0, n=1):
 
 
 def am3_tuple(function, x0, x1, y0, n):
+    # Calcula o tamanho do passo em X dependendo do numero de intervalos
     h = (x1 - x0) / float(n)
+
     # Inicializacao
     x_k_minus_one = x0
     y_k_minus_one = y0
 
     # Primeiro ponto
     x_k = x0 + h
-    y_k = rk2(function, x0, x_k, y0, 1)
+    y_k = rk2(function, x0, x_k, y0, n)
 
     # Segundo ponto
     x_k_plus_one = x_k + h
-    y_k_plus_one = rk2(function, x_k, x_k_plus_one, y_k, 1)
+    y_k_plus_one = rk2(function, x_k, x_k_plus_one, y_k, n)
 
     for i in range(1, n + 1):
         # Calcula temporarias para usar na conta
@@ -52,18 +54,20 @@ def am3_tuple(function, x0, x1, y0, n):
 
 
 def am3_int(function, x0, x1, y0, n):
+    # Calcula o tamanho do passo em X dependendo do numero de intervalos
     h = (x1 - x0) / float(n)
+
     # Inicializacao
     x_k_minus_one = x0
     y_k_minus_one = y0
 
     # Primeiro ponto
     x_k = x0 + h
-    y_k = rk2(function, x0, x_k, y0, 1)
+    y_k = rk2(function, x0, x_k, y0, n)
 
     # Segundo ponto
     x_k_plus_one = x_k + h
-    y_k_plus_one = rk2(function, x_k, x_k_plus_one, y_k, 1)
+    y_k_plus_one = rk2(function, x_k, x_k_plus_one, y_k, n)
 
     for i in range(1, n + 1):
         # Calcula temporarias para usar na conta

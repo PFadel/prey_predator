@@ -1,19 +1,30 @@
 # encoding utf-8
-# import math
+import math
 from methods.am3 import am3
 from methods.rk4 import rk4
-from UI import ask_for_intervals, ask_for_time
+from UI import ask_for_intervals, ask_for_time, ask_for_entry, ask_for_function
 
 
-def function(t, y):
+def const_function(t, y):
     alfa = 0.4
     beta = 0.01
     delta = 0.2
     gama = 0.001
-    pop_presa = y[0]
-    pop_predador = y[1]
-    return (alfa * pop_presa - beta * pop_presa * pop_predador,
-            gama * pop_presa * pop_predador - delta * pop_predador)
+    preys = y[0]
+    predators = y[1]
+    return (alfa * preys - beta * preys * predators,
+            gama * preys * predators - delta * predators)
+
+
+def var_function(t, y):
+    alfa = 0.4
+    beta = 0.01
+    delta = 0.2
+    gama = 0.001
+    preys = y[0]
+    predators = y[1]
+    return ((2 + math.sin(t)) * alfa * preys - beta * preys * predators,
+            gama * preys * predators - delta * predators)
 
 print 'Ola! Bem vindo ao programa em Python mais super duper legal de todos!'
 print 'Possuimos dois tipos de metodos, Runge Kutta 4 e Adams Moulton 3!'
@@ -33,7 +44,22 @@ while True:
             print 'Byebye!'
             break
 
-        print rk4(function, 0, time, (240, 40), intervals)
+        entry = ask_for_entry()
+        if entry is None:
+            print 'Byebye!'
+            break
+
+        choice = ask_for_function()
+        if choice is None:
+            print 'Byebye!'
+            break
+        else:
+            if choice == 1:
+                function = const_function
+            elif choice == 2:
+                function = var_function
+
+        print 'Resultado: {}'.format(rk4(function, 0, time, entry, intervals))
         print 'Se deseja sair use [0]!'
 
     elif method == 2:
@@ -47,7 +73,22 @@ while True:
             print 'Byebye!'
             break
 
-        print am3(function, 0, time, (240, 40), intervals)
+        entry = ask_for_entry()
+        if entry is None:
+            print 'Byebye!'
+            break
+
+        choice = ask_for_function()
+        if choice is None:
+            print 'Byebye!'
+            break
+        else:
+            if choice == 1:
+                function = const_function
+            elif choice == 2:
+                function = var_function
+
+        print 'Resultado: {}'.format(am3(function, 0, time, entry, intervals))
         print 'Se deseja sair use [0]!'
 
     elif method == 0:
