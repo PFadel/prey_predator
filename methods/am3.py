@@ -25,11 +25,11 @@ def am3_tuple(function, x0, x1, y0, n):
 
     # Primeiro ponto
     x_k = x0 + h
-    y_k = rk2(function, x0, x_k, y0, n)
+    y_k = rk2(function, x0, x_k, y0, 1)
 
     # Segundo ponto
     x_k_plus_one = x_k + h
-    y_k_plus_one = rk2(function, x_k, x_k_plus_one, y_k, n)
+    y_k_plus_one = rk2(function, x_k, x_k_plus_one, y_k, 1)
 
     for i in range(1, n + 1):
         # Calcula temporarias para usar na conta
@@ -38,8 +38,10 @@ def am3_tuple(function, x0, x1, y0, n):
 
         temp_k = multi_tuple(8 / 12, function(x_k, y_k))
 
+        predicted_y_k_plus_one = rk2(function, x_k, x_k_plus_one, y_k, 1)
+
         temp_k_plus_one = multi_tuple(5 / 12, function(x_k_plus_one,
-                                                       y_k_plus_one))
+                                                       predicted_y_k_plus_one))
 
         # Calcula novo valor de Y
         new_y = add_two_tuples(y_k, multi_tuple(h, (add_many_tuples(
@@ -82,7 +84,11 @@ def am3_int(function, x0, x1, y0, n):
         # Calcula temporarias para usar na conta
         temp_k_minus_one = -1 / 12 * function(x_k_minus_one, y_k_minus_one)
         temp_k = 8 / 12 * function(x_k, y_k)
-        temp_k_plus_one = 5 / 12 * function(x_k_plus_one, y_k_plus_one)
+
+        predicted_y_k_plus_one = rk2(function, x_k, x_k_plus_one, y_k, n)
+
+        temp_k_plus_one = 5 / 12 * function(x_k_plus_one,
+                                            predicted_y_k_plus_one)
 
         # Calcula novo valor de Y
         new_y = y_k + h * (temp_k_minus_one + temp_k + temp_k_plus_one)
