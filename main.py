@@ -2,7 +2,11 @@
 import math
 from methods.am3 import am3
 from methods.rk4 import rk4
-from UI import ask_for_intervals, ask_for_time, ask_for_entry, ask_for_function
+from UI import (ask_for_intervals, ask_for_time, ask_for_entry,
+                ask_for_function, ask_for_limit)
+
+limit_pop = False
+max_preys = 300
 
 
 def const_function(t, y):
@@ -12,8 +16,12 @@ def const_function(t, y):
     gama = 0.001
     preys = y[0]
     predators = y[1]
-    return (alfa * preys - beta * preys * predators,
-            gama * preys * predators - delta * predators)
+    if limit_pop is False or predators != 0:
+        return (alfa * preys - beta * preys * predators,
+                gama * preys * predators - delta * predators)
+    else:
+        return (alfa * (max_preys - preys),
+                gama * preys * predators - delta * predators)
 
 
 def var_function(t, y):
@@ -23,8 +31,12 @@ def var_function(t, y):
     gama = 0.001
     preys = y[0]
     predators = y[1]
-    return ((2 + math.sin(t)) * alfa * preys - beta * preys * predators,
-            gama * preys * predators - delta * predators)
+    if limit_pop is False or predators != 0:
+        return ((2 + math.sin(t)) * alfa * preys - beta * preys * predators,
+                gama * preys * predators - delta * predators)
+    else:
+        return (alfa * (max_preys - preys),
+                gama * preys * predators - delta * predators)
 
 print 'Ola! Bem vindo ao programa em Python mais super duper legal de todos!'
 print 'Possuimos dois tipos de metodos, Runge Kutta 4 e Adams Moulton 3!'
@@ -48,6 +60,15 @@ while True:
         if entry is None:
             print 'Byebye!'
             break
+
+        limit = ask_for_limit()
+        if entry is None:
+            print 'Byebye!'
+            break
+        elif limit == 1:
+            limit_pop = True
+        else:
+            limit_pop = False
 
         choice = ask_for_function()
         if choice is None:
@@ -77,6 +98,15 @@ while True:
         if entry is None:
             print 'Byebye!'
             break
+
+        limit = ask_for_limit()
+        if entry is None:
+            print 'Byebye!'
+            break
+        elif limit == 1:
+            limit_pop = True
+        else:
+            limit_pop = False
 
         choice = ask_for_function()
         if choice is None:

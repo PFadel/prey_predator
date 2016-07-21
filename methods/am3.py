@@ -1,6 +1,7 @@
 # encoding utf-8
 from utils import multi_tuple, add_many_tuples, add_two_tuples
 from rk2 import rk2
+import csv
 
 
 def am3(function, x0, x1, y0, n=1):
@@ -11,9 +12,13 @@ def am3(function, x0, x1, y0, n=1):
 
 
 def am3_tuple(function, x0, x1, y0, n):
-    # Calcula o tamanho do passo em X dependendo do numero de intervalos
-    h = (x1 - x0) / float(n)
 
+    csv_file_prey = open('results_prey.csv', 'w')
+    csv_file_predator = open('results_predator.csv', 'w')
+    prey_writer = csv.writer(csv_file_prey)
+    predator_writer = csv.writer(csv_file_predator)
+
+    h = (x1 - x0) / float(n)
     # Inicializacao
     x_k_minus_one = x0
     y_k_minus_one = y0
@@ -50,13 +55,17 @@ def am3_tuple(function, x0, x1, y0, n):
         y_k = y_k_plus_one
         y_k_plus_one = new_y
 
+        # Salva nos arquivos csv
+        prey_writer.writerow([x_k_plus_one, y_k_plus_one[0]])
+        predator_writer.writerow([x_k_plus_one, y_k_plus_one[1]])
+
+    csv_file_prey.close()
+    csv_file_predator.close()
     return y_k_plus_one
 
 
 def am3_int(function, x0, x1, y0, n):
-    # Calcula o tamanho do passo em X dependendo do numero de intervalos
     h = (x1 - x0) / float(n)
-
     # Inicializacao
     x_k_minus_one = x0
     y_k_minus_one = y0

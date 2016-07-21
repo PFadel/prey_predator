@@ -17,6 +17,21 @@ def ask_for_function():
     return choice
 
 
+def ask_for_limit():
+    while True:
+        print 'Se deseja sair use [0]!'
+        choice = input('Deseja limitar o numero de presas ? '
+                       '[1] Sim [2] Nao \n')
+
+        if choice == 0:
+            return None
+        elif choice in [1, 2]:
+            break
+        else:
+            print 'Essa nao e uma opcao valida!'
+    return choice
+
+
 def ask_for_time():
     while True:
         print 'Se deseja sair use [0]!'
